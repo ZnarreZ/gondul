@@ -1,0 +1,27 @@
+---
+- hosts: all
+  roles:
+    - common
+  vars:
+    git_repo: https://github.com/gathering/gondul.git
+    git_branch: master
+- hosts: postgres
+  become: true
+  roles:
+    - postgres
+- hosts: web
+  become: true
+  roles:
+    - web
+- hosts: influx
+  become: true
+  roles:
+    - influx
+- hosts: ping
+  become: true
+  roles:
+    - ping
+- hosts: snmp
+  become: true
+  roles:
+    - snmp

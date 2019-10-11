@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+chown -R _graphite:_graphite /var/lib/graphite/
+service graphite-api start
+service carbon-cache start
+while true; do sleep 10; done

@@ -1,0 +1,23 @@
+- name: Install apt-packages
+  apt:
+      name: 'apt-transport-https'
+      state: present
+
+- name: Import InfluxDB GPG signing key
+  apt_key: url=https://repos.influxdata.com/influxdb.key state=present
+
+- name: Add InfluxDB repository
+  apt_repository: repo='deb https://repos.influxdata.com/ubuntu bionic stable' state=present
+
+- name: Install InfluxDB packages
+  apt: name=influxdb state=present update_cache=yes
+
+- name: Start the InfluxDB service
+  service: name=influxdb state=started
+
+- name: Wait a few seconds for InfluxDB to start
+  pause:
+    seconds: 5
+
+- name: Create database
+  command: /usr/bin/influx -execute 'CREATE DATABASE gondul'
