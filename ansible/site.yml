@@ -1,5 +1,8 @@
 ---
 - hosts: all
+  vars:
+    git_repo: https://github.com/gathering/gondul.git
+    git_branch: master
   become: true
   roles:
     - common
@@ -8,12 +11,9 @@
     - influx
     - ping
     - snmp
-  vars:
-    git_repo: https://github.com/gathering/gondul.git
-    git_branch: master
   tasks:
     - name: "download/replace pics"
-      geturl:
+      get_url:
         url: https://raw.githubusercontent.com/ZnarreZ/gondul/master/web/img/floor.png
         dest: /opt/gondul/web/pic/floor.png
         force: true
