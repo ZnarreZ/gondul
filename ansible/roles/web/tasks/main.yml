@@ -33,6 +33,7 @@
           'cpanminus',
           'apt-transport-https',
           'python3-netaddr',
+          'python3-dotenv',
           'python3-flask']
       state: present
 
