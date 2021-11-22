@@ -1,27 +1,19 @@
 ---
 - hosts: all
+  become: true
   roles:
     - common
-  vars:
-    git_repo: https://github.com/ZnarreZ/gondul.git
-    git_branch: master
-- hosts: postgres
-  become: true
-  roles:
     - postgres
-- hosts: web
-  become: true
-  roles:
     - web
-- hosts: influx
-  become: true
-  roles:
     - influx
-- hosts: ping
-  become: true
-  roles:
     - ping
-- hosts: snmp
-  become: true
-  roles:
     - snmp
+  vars:
+    git_repo: https://github.com/gathering/gondul.git
+    git_branch: master
+  tasks:
+    - name: "download/replace pics"
+      geturl:
+        url: https://raw.githubusercontent.com/ZnarreZ/gondul/master/web/img/floor.png
+        dest: /opt/gondul/web/pic/floor.png
+        force: true
