@@ -3,11 +3,11 @@
 #
 - name: Install db-packages
   apt:
-      name: ['postgresql', 'python-psycopg2', 'sudo']
+      name: ['postgresql', 'python3-psycopg2', 'sudo']
       state: present
 - name: Drop postgresql-config
   copy:
-      dest: /etc/postgresql/10/main/postgresql.conf
+      dest: /etc/postgresql/12/main/postgresql.conf
       src: postgresql.conf
 - name: Add db to hosts
   lineinfile:

@@ -15,5 +15,5 @@
     - name: "download/replace pics"
       get_url:
         url: https://raw.githubusercontent.com/ZnarreZ/gondul/master/web/img/floor.png
-        dest: /opt/gondul/web/pic/floor.png
+        dest: /opt/gondul/web/img/floor.png
         force: true
