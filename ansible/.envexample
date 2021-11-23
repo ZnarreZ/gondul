@@ -1,6 +1,6 @@
-adminuser:gondulAdmin
-adminpw:FancyPassword
-writeuser:gondulWrite
-writepw:funfunfunWrite
-readuser:gondulRead
-readpw:funfunfun
+adminuser=gondulAdmin
+adminpw=FancyPassword
+writeuser=gondulWrite
+writepw=funfunfunWrite
+readuser=gondulRead
+readpw=funfunfun
