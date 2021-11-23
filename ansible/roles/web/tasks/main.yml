@@ -1,4 +1,4 @@
-- name: Install front-packages
+- name: Install front-packages part 1
   apt:
       name: [
           'libcapture-tiny-perl',
@@ -11,7 +11,11 @@
           'libgeo-ip-perl',
           'libhtml-parser-perl',
           'libhtml-template-perl',
-          'libjson-perl',
+          'libjson-perl']
+      state: present
+- name: Install front-packages part 2
+  apt:
+      name: [
           'libjson-xs-perl',
           'libnetaddr-ip-perl',
           'libnet-cidr-perl',
@@ -22,7 +26,11 @@
           'libsocket6-perl',
           'libsocket-perl',
           'libswitch-perl',
-          'libtimedate-perl',
+          'libtimedate-perl']
+      state: present
+- name: install front-packages part 3
+  apt:
+      name: [
           'perl',
           'perl-base',
           'perl-modules',
