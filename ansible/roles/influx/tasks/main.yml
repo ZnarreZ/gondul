@@ -1,6 +1,8 @@
 - name: Install apt-packages
   apt:
-      name: 'apt-transport-https'
+      name:
+        - 'apt-transport-https'
+        - 'python3-influxdb'
       state: present
 
 - name: Import InfluxDB GPG signing key
