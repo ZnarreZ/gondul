@@ -1,0 +1,11 @@
+---
+- name: "influxdb"
+  service:
+    name: influxdb
+    state: restarted
+  listen: "restart influx"
+- name: "influxd"
+  service:
+    name: influxd
+    state: restarted
+  listen: "restart influx"

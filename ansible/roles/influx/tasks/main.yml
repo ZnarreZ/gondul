@@ -23,3 +23,44 @@
 
 - name: Create database
   command: /usr/bin/influx -execute 'CREATE DATABASE gondul'
+
+- block:
+  - name: Get env file content
+    slurp:
+      src: ./.env
+    register: env_file
+  - name: Parse environment
+    set_fact:
+      local_vars: "{{ ('{' + (env_file.content | b64decode).split('\n') | select | map('regex_replace', '([^=]*)=(.*)', '\"\\1\": \"\\2\"') | join(',') + '}') | from_json }}"
+
+- block:
+  - name: "Make main user:"
+    influxdb_user:
+      user_name: local_vars.adminuser
+      user_password: local_vars.adminpw
+      admin: true
+  - name: "Make WRITE user:"
+    influxdb_user:
+      user_name: local_vars.writeuser
+      user_password: local_vars.writepw
+      grants:
+      - database: 'gondul'
+        privilege: 'WRITE'
+  - name: "Make READ user:"
+    influxdb_user:
+      user_name: local_vars.readuser
+      user_password: local_vars.readpw
+      grants:
+      - database: 'gondul'
+        privilege: 'READ'
+  become: true
+  become_user: postgres
+- block:
+  - name: "enable auth"
+    ini_file:
+      path: "/etc/influxdb/influxdb.conf"
+      section: http
+      option: auto-enabled
+      value: 'true'
+      no_extra_spaces: false
+    notify: 'restart influx'
