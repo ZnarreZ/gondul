@@ -125,5 +125,5 @@
   lineinfile:
     path: "/etc/varnish/default.vcl"
     insertafter: 'if \(req\.url ~ "\^/query"\) \{'
-    line: "  set req.http.Authorization = \"Basic {{ local_vars.readuser + ':' + local_vars.readpw | b64encode }}\";"
+    line: "  set req.http.Authorization = \"Basic {{ (local_vars.readuser + ':' + local_vars.readpw) | b64encode }}\";"
     state: present
